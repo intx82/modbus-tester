@@ -39,6 +39,15 @@ namespace zerd.modbus
         /// </summary>
         string _logPath;
 
+        /// <summary>
+        /// Is current played file paused (will be paused)
+        /// </summary>
+        public bool Paused { get; set; }
+
+        /// <summary>
+        /// Show is currently player running something or not
+        /// </summary>
+        public bool IsRunning => Port.IsOpen;
 
         /// <summary>
         /// Путь проигрываемого скрипта
@@ -83,6 +92,11 @@ namespace zerd.modbus
         /// calls event when file starts playing
         /// </summary>
         public event EventHandler OnStart;
+
+        /// <summary>
+        /// Calls event when file on pause
+        /// </summary>
+        public event EventHandler<bool> OnPause;
 
         /// <summary>
         /// Convert hex string to byte array 
@@ -278,6 +292,17 @@ namespace zerd.modbus
                             {
                                 Logger.Warn("TX: Empty");
                             }
+                        }
+
+                        if (Paused)
+                        {
+                            Logger.Warn("Paused");
+                            OnPause?.Invoke(this, true);
+                            while (Paused)
+                            {
+                                Thread.Sleep(100);
+                            }
+                            OnPause?.Invoke(this, false);
                         }
 
                         if (cancelSrc.IsCancellationRequested)

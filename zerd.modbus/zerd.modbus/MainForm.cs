@@ -221,5 +221,26 @@ namespace zerd.modbus
             PlayNext = false;
             StopAll();
         }
+
+        /// <summary>
+        /// On pause click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PauseBtn_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow dr in ScriptDGV.Rows)
+            {
+                if((dr.Cells[0].Tag as Player).IsRunning)
+                {
+                    (dr.Cells[0].Tag as Player).Paused ^= true;
+                }
+                else
+                {
+                    (dr.Cells[0].Tag as Player).Paused = false;
+                }
+            }
+
+        }
     }
 }

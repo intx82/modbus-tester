@@ -309,6 +309,7 @@ namespace zerd.modbus
             this.PauseBtn.Size = new System.Drawing.Size(64, 30);
             this.PauseBtn.TabIndex = 1;
             this.PauseBtn.UseVisualStyleBackColor = true;
+            this.PauseBtn.Click += new System.EventHandler(this.PauseBtn_Click);
             // 
             // PlayBtn
             // 
