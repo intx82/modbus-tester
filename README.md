@@ -1,16 +1,16 @@
 # modbus-tester
-Modbus devices tester
+Modbus device tester
 
 ## Scripts
 
-Script contains instructions that will be transfered into serial port. 
-Currently scripts has only two type of instructions:
+Script contains instructions that will be transferred into serial port. 
+Currently, scripts has only two type of instructions:
 
 * Hex string. Could have different byte separators, like: space, '-', '_' or not have at all. For example:
   - 00010203040506 
   - 0A-04-00-10-00-03
   
-To all transmitted data, will calculated modbus CRC and transmitted with provided body. So for provided example below in port will be transmitted: 0A-04-00-10-00-03-B0-B5
+To all transmitted data, will calculate modbus CRC and transmitted with provided body. So for provided example below in port will be transmitted: 0A-04-00-10-00-03-B0-B5
  
 * Delay command with time in ms as an additional argument. Example:
   - Delay 1000 -> will delay for 1s
